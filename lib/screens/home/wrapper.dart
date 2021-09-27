@@ -1,6 +1,7 @@
 import 'package:booking_app/models/user.dart';
 import 'package:booking_app/screens/authentication/authenticate.dart';
 import 'package:booking_app/screens/datapages/properties_list.dart';
+import 'package:booking_app/screens/datapages/properties_listt.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class Wrapper extends StatelessWidget {
     }
     else{
       return PropertiesList();
+      //return PropsList();
     }
   }
 }
