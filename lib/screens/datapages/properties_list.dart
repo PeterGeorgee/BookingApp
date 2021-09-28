@@ -16,22 +16,14 @@ class _PropertiesListState extends State<PropertiesList> {
 
   List<Properties> propsOnSearch=[];
 
-  List<Properties> props=[
-    Properties(ownerName:'Peter George', propID:'1', propName:'Beit el Wadi', location:'Wadi El natroon'),
-    Properties(ownerName:'Peter Magdy', propID:'2', propName:'Beit el Salam', location:'Agamy'),
-    Properties(ownerName:'Abadeer Afif', propID:'3', propName:'Beit el Merryland', location:'Obour'),
-    Properties(ownerName:'Kareem', propID:'4', propName:'Beit Sam3an el Kharaz', location:'Wadi El natroon'),
-  ];
+  // List<Properties> props=[
+  //   Properties(ownerName:'Peter George', propID:'1', propName:'Beit el Wadi', location:'Wadi El natroon'),
+  //   Properties(ownerName:'Peter Magdy', propID:'2', propName:'Beit el Salam', location:'Agamy'),
+  //   Properties(ownerName:'Abadeer Afif', propID:'3', propName:'Beit el Merryland', location:'Obour'),
+  //   Properties(ownerName:'Kareem', propID:'4', propName:'Beit Sam3an el Kharaz', location:'Wadi El natroon'),
+  // ];
 
-  void viewProperty(index){
-    Properties instance=_textEditingController!.text.isNotEmpty?propsOnSearch[index]:props[index];
-    // Navigator.pushNamed(context,'/propData',arguments: {
-    //   'propName':instance.propName,
-    //   'owner':instance.ownerName,
-    //   'loc':instance.location,
-    // });
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>PropertyData(MyProperty: instance, )));
-  }
+
 
   TextEditingController? _textEditingController=TextEditingController();
   @override
@@ -46,7 +38,7 @@ class _PropertiesListState extends State<PropertiesList> {
           child: TextField(
             onChanged: (value){
               setState(() {
-                propsOnSearch=props.where((element) => element.propName.toLowerCase().contains(value)).toList();
+                propsOnSearch=properties.where((element) => element.propName.toLowerCase().startsWith(value)).toList();
               });
             },
             controller: _textEditingController,
@@ -86,7 +78,8 @@ class _PropertiesListState extends State<PropertiesList> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.search_off,size: 90.0,),
+              Icon(Icons.search_off,size: 70.0,),
+              SizedBox(height:15.0),
               Text(
                 'No results found',
                 style: TextStyle(

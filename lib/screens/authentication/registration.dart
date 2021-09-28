@@ -105,7 +105,6 @@ class _RegistrationState extends State<Registration> {
                     });
                   },
                 ),
-
                 SizedBox(height: 20.0,),
                 FlatButton.icon(
                   icon: Icon(Icons.calendar_today),
@@ -117,7 +116,7 @@ class _RegistrationState extends State<Registration> {
                     });
                   },
                 ),
-                SizedBox(height: 10.0,),
+                SizedBox(height: 5.0,),
                 DropdownButton<String>(
                   icon: Icon(Icons.arrow_drop_down_circle),
                   iconSize: 20,

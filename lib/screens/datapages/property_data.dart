@@ -16,16 +16,16 @@ class PropertyData extends StatelessWidget {
     'assets/egypt 1.jpg',
     'assets/egypt 2.jpg'
   ];
+  String userType='Peter George ';
 
   @override
   Widget build(BuildContext context) {
-    //data=data.isNotEmpty?data:ModalRoute.of(context)!.settings.arguments as Map;
     return Scaffold(
       appBar: AppBar(
         title: Text(MyProperty.propName),
         backgroundColor: Colors.black,
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Container(
           child: Padding(
             padding: EdgeInsets.fromLTRB(10.0, 20.0, 0.0, 0.0),
@@ -35,6 +35,17 @@ class PropertyData extends StatelessWidget {
                 Text(MyProperty.propName,style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold),),
                 SizedBox(height: 5.0,),
                 Text(MyProperty.location,style: TextStyle(fontSize: 15.0),),
+                SizedBox(height: 40.0,),
+                DropdownButton<String>(
+                  value: userType,
+                  icon: Icon(Icons.meeting_room),
+                  items: <String>['Peter','Peter George '].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value)
+                    );
+                  }).toList(),
+                ),
                 SizedBox(height: 40.0,),
                 CarouselSlider.builder(itemCount: 3, itemBuilder: (context,index,realIndex){
                   return Container(
