@@ -21,7 +21,7 @@ class _PropertyDataState extends State<PropertyData> {
     'assets/egypt 2.jpg'
   ];
   String userType='Peter George ';
-  //sList<String> hallsNames=[];
+  //List<String> hallsNames=[];
   late Halls selectedHall;
 
   @override
@@ -56,15 +56,15 @@ class _PropertyDataState extends State<PropertyData> {
                   items: widget.MyProperty.halls.map((Halls hall) {
                     return  DropdownMenuItem<Halls>(
                       value: hall,
-                      child: Row(
+                      child: Column(
                         children: <Widget>[
                           Text(
                             hall.hallName,
                             style:  TextStyle(color: Colors.black),
                           ),
-                          SizedBox(width: 10,),
+                          SizedBox(height: 4,),
                           Text(
-                            hall.hallCapacity.toString(),
+                            'Capacity: ${hall.hallCapacity.toString()}',
                           )
                         ],
                       ),
