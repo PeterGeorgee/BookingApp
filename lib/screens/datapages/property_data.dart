@@ -13,15 +13,22 @@ class PropertyData extends StatefulWidget {
 
 class _PropertyDataState extends State<PropertyData> {
 
+
+
   List <String> imagelist=[
     'assets/egypt.png',
     'assets/egypt 1.jpg',
     'assets/egypt 2.jpg'
   ];
   String userType='Peter George ';
+  //sList<String> hallsNames=[];
+  late Halls selectedHall;
 
   @override
   Widget build(BuildContext context) {
+    // for(int i=0;i<widget.MyProperty.halls.length;i++){
+    //   hallsNames[i]=widget.MyProperty.halls[i].hallName;
+    // }
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.MyProperty.propName),
@@ -38,21 +45,31 @@ class _PropertyDataState extends State<PropertyData> {
                 SizedBox(height: 5.0,),
                 Text(widget.MyProperty.location,style: TextStyle(fontSize: 15.0),),
                 SizedBox(height: 40.0,),
-                DropdownButtonFormField<String>(
-                  hint: Text('Choose Type'),
-                  value: userType,
-                  icon: Icon(Icons.meeting_room),
-                  items: <String>['Peter','Peter George '].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value)
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
+                DropdownButton<Halls>(
+                  hint:  Text("Select Hall"),
+                  value: selectedHall,
+                  onChanged: (Halls? Value) {
                     setState(() {
-                      userType = newValue!;
+                      selectedHall = Value!;
                     });
                   },
+                  items: widget.MyProperty.halls.map((Halls hall) {
+                    return  DropdownMenuItem<Halls>(
+                      value: hall,
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            hall.hallName,
+                            style:  TextStyle(color: Colors.black),
+                          ),
+                          SizedBox(width: 10,),
+                          Text(
+                            hall.hallCapacity.toString(),
+                          )
+                        ],
+                      ),
+                    );
+                  }).toList(),
                 ),
                 SizedBox(height: 40.0,),
                 CarouselSlider.builder(itemCount: 3, itemBuilder: (context,index,realIndex){
