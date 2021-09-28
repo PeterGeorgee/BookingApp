@@ -1,6 +1,7 @@
 import 'package:booking_app/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:booking_app/services/SavingUserData.dart';
 
 class AuthService{
   final FirebaseAuth _auth=FirebaseAuth.instance;
@@ -27,10 +28,11 @@ class AuthService{
   }
 
   //register with email and pass
-  Future registerWithEmailAndPassword(String email,String password)async{
+  Future registerWithEmailAndPassword(String email,String password,String firstname,String Lastname, String UserName, bool isnormaluser, String phonenumber)async{
     try{
       UserCredential result=await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user=result.user;
+      await saveuserdata(userid: user!.uid).UpdateUserData(firstname, Lastname, UserName, isnormaluser, phonenumber);
 
       return _userFromFirebaseUser(user!);
     }

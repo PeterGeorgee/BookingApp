@@ -1,6 +1,6 @@
 class Properties{
   String ownerName;
-  int propID;
+  String propID;
   String propName;
   String location;
 
