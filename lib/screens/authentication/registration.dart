@@ -3,7 +3,8 @@ import 'package:booking_app/screens/shared/loading.dart';
 import 'package:booking_app/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class Registration extends StatefulWidget {
+class Registration extends StatefulWidget
+{
   final Function toggleView;
   Registration({required this.toggleView});
 
@@ -25,6 +26,7 @@ class _RegistrationState extends State<Registration> {
   DateTime dateofbirth=DateTime.now();
   String userType='Normal User ';
   String error='';
+  String phonenumber='';
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,16 @@ class _RegistrationState extends State<Registration> {
                 ),
                 SizedBox(height: 20.0,),
                 TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'Phone'),
+                  validator: (val)=>val!.isEmpty?'Enter Phone Number':null,
+                  onChanged: (val){
+                    setState(() {
+                      phonenumber=val;
+                    });
+                  },
+                ),
+                SizedBox(height: 20.0,),
+                TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Email'),
                   validator: (val)=>val!.isEmpty?'Enter an email':null,
                   onChanged: (val){
@@ -93,6 +105,7 @@ class _RegistrationState extends State<Registration> {
                     });
                   },
                 ),
+
                 SizedBox(height: 20.0,),
                 FlatButton.icon(
                   icon: Icon(Icons.calendar_today),
@@ -130,7 +143,12 @@ class _RegistrationState extends State<Registration> {
                       setState(() {
                         loading=true;
                       });
-                      dynamic result=await _auth.registerWithEmailAndPassword(email, password);
+                      bool isnormal=false;
+                      if(userType=='Normal User')
+                        {
+                          isnormal=true;
+                        }
+                      dynamic result=await _auth.registerWithEmailAndPassword(email, password,firstName,lastName,username,isnormal,phonenumber);
                       if(result==null){
                         setState(() {
                           error='Please enter a valid email address';
