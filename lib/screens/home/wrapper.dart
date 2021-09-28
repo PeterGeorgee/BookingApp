@@ -5,7 +5,6 @@ import 'package:booking_app/services/GetPropdata.dart';
 import 'package:booking_app/services/properties_class.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({Key? key}) : super(key: key);
@@ -20,7 +19,6 @@ class Wrapper extends StatelessWidget {
     else{
       return StreamProvider<List<Properties>>.value(child: PropertiesList(),
       value: getpropertiesfromdatabase().propers, initialData: [],);
-      //return PropsList();
     }
   }
 }
