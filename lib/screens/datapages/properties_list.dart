@@ -1,4 +1,3 @@
-import 'package:booking_app/screens/datapages/property_data.dart';
 import 'package:booking_app/screens/datapages/property_tile.dart';
 import 'package:booking_app/services/properties_class.dart';
 import 'package:firebase_auth/firebase_auth.dart';
