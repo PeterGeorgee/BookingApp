@@ -1,9 +1,8 @@
 import 'package:booking_app/screens/datapages/property_data.dart';
-import 'package:booking_app/services/auth.dart';
+import 'package:booking_app/screens/datapages/property_tile.dart';
 import 'package:booking_app/services/properties_class.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PropertiesList extends StatefulWidget {
   const PropertiesList({Key? key}) : super(key: key);
@@ -17,10 +16,10 @@ class _PropertiesListState extends State<PropertiesList> {
   List<Properties> propsOnSearch=[];
 
   List<Properties> props=[
-    Properties(ownerName:'Peter George', propID:1, propName:'Beit el Wadi', location:'Wadi El natroon'),
-    Properties(ownerName:'Peter Magdy', propID:2, propName:'Beit el Salam', location:'Agamy'),
-    Properties(ownerName:'Abadeer Afif', propID:3, propName:'Beit el Merryland', location:'Obour'),
-    Properties(ownerName:'Kareem', propID:4, propName:'Beit Sam3an el Kharaz', location:'Wadi El natroon'),
+    Properties(ownerName:'Peter George', propID:'1', propName:'Beit el Wadi', location:'Wadi El natroon'),
+    Properties(ownerName:'Peter Magdy', propID:'2', propName:'Beit el Salam', location:'Agamy'),
+    Properties(ownerName:'Abadeer Afif', propID:'3', propName:'Beit el Merryland', location:'Obour'),
+    Properties(ownerName:'Kareem', propID:'4', propName:'Beit Sam3an el Kharaz', location:'Wadi El natroon'),
   ];
 
   void viewProperty(index){
@@ -33,10 +32,10 @@ class _PropertiesListState extends State<PropertiesList> {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>PropertyData(MyProperty: instance, )));
   }
 
-  final AuthService _auth=AuthService();
   TextEditingController? _textEditingController=TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final properties=Provider.of<List<Properties>>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -60,7 +59,7 @@ class _PropertiesListState extends State<PropertiesList> {
             ),
           ),
         ),
-        actions: <Widget>[
+        actions: [
           TextButton(onPressed: (){
             propsOnSearch.clear();
             _textEditingController!.clear();
@@ -68,16 +67,7 @@ class _PropertiesListState extends State<PropertiesList> {
               _textEditingController!.text='';
             });
           },
-              child: Icon(Icons.close,color: Colors.black,)),
-          FlatButton.icon(
-              onPressed: ()async{
-                await FirebaseAuth.instance.signOut();
-                //await _auth.signOut();
-              },
-              icon: Icon(Icons.person,color: Colors.white,),
-              label: Text('Logout'),
-            textColor: Colors.white,
-          ),
+              child: Icon(Icons.close,color: Colors.black,))
         ],
       ),
       body: _textEditingController!.text.isNotEmpty&&propsOnSearch.isEmpty?
@@ -100,25 +90,9 @@ class _PropertiesListState extends State<PropertiesList> {
         ),
       ):
       ListView.builder(
-        itemCount: _textEditingController!.text.isNotEmpty?propsOnSearch.length:props.length,
+        itemCount: properties.length,
         itemBuilder: (context,index){
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 4.0),
-            child: Card(
-              child: ListTile(
-                onTap: (){
-                  viewProperty(index);
-                },
-                title: Text(
-                    _textEditingController!.text.isNotEmpty?propsOnSearch[index].propName:props[index].propName
-                ),
-                subtitle: Text(_textEditingController!.text.isNotEmpty?propsOnSearch[index].location:props[index].location),
-                // leading: CircleAvatar(
-                //   backgroundImage: AssetImage('assets/${_textEditingController!.text.isNotEmpty?locationsOnSearch[index].flag:locations[index].flag}'),
-                // ),
-              ),
-            ),
-          );
+          return PropertyTile(props: properties[index]);
         },
       ),
     );

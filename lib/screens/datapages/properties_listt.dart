@@ -15,10 +15,10 @@ class PropsList extends StatefulWidget {
 class _PropsListState extends State<PropsList> {
   List<Properties> propsOnSearch=[];
   List<Properties> props=[
-    Properties(ownerName:'Peter George', propID:1, propName:'Beit el Wadi', location:'Wadi El natroon'),
-    Properties(ownerName:'Peter Magdy', propID:2, propName:'Beit el Salam', location:'Agamy'),
-    Properties(ownerName:'Abadeer Afif', propID:3, propName:'Beit el Merryland', location:'Obour'),
-    Properties(ownerName:'Kareem', propID:4, propName:'Beit Sam3an el Kharaz', location:'Wadi El natroon'),
+    Properties(ownerName:'Peter George', propID:'1', propName:'Beit el Wadi', location:'Wadi El natroon'),
+    Properties(ownerName:'Peter Magdy', propID:'2', propName:'Beit el Salam', location:'Agamy'),
+    Properties(ownerName:'Abadeer Afif', propID:'3', propName:'Beit el Merryland', location:'Obour'),
+    Properties(ownerName:'Kareem', propID:'4', propName:'Beit Sam3an el Kharaz', location:'Wadi El natroon'),
   ];
 
   final AuthService _auth=AuthService();
@@ -27,12 +27,12 @@ class _PropsListState extends State<PropsList> {
   Widget build(BuildContext context) {
     final properties=Provider.of<List<Properties>>(context);
 
-    // return ListView.builder(
-    //   itemCount: properties.length,
-    //   itemBuilder: (context,index){
-    //     return PropertyTile(props: properties[index]);
-    //   },
-    // );
+    return ListView.builder(
+       itemCount: properties.length,
+       itemBuilder: (context,index){
+         return PropertyTile(props: properties[index]);
+       },
+     );
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -75,7 +75,7 @@ class _PropsListState extends State<PropsList> {
             ),
           ],
         ),
-         body: //_textEditingController!.text.isNotEmpty&&propsOnSearch.isEmpty?
+        body: //_textEditingController!.text.isNotEmpty&&propsOnSearch.isEmpty?
         // Padding(
         //   padding: const EdgeInsets.all(8.0),
         //   child: Center(

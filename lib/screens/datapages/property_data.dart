@@ -61,4 +61,3 @@ class PropertyData extends StatelessWidget {
     );
   }
 }
-
