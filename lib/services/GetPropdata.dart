@@ -1,5 +1,3 @@
-
-import 'package:booking_app/services/PropertyMiniclass.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/services/properties_class.dart';

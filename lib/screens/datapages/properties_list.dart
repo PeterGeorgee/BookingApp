@@ -1,6 +1,7 @@
 import 'package:booking_app/screens/datapages/property_data.dart';
 import 'package:booking_app/screens/datapages/property_tile.dart';
 import 'package:booking_app/services/properties_class.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -67,7 +68,15 @@ class _PropertiesListState extends State<PropertiesList> {
               _textEditingController!.text='';
             });
           },
-              child: Icon(Icons.close,color: Colors.black,))
+              child: Icon(Icons.close,color: Colors.black,)),
+          FlatButton.icon(
+            onPressed: ()async{
+              await FirebaseAuth.instance.signOut();
+            },
+            icon: Icon(Icons.person,color: Colors.white,),
+            label: Text('Logout'),
+            textColor: Colors.white,
+          ),
         ],
       ),
       body: _textEditingController!.text.isNotEmpty&&propsOnSearch.isEmpty?
