@@ -1,7 +1,6 @@
 import 'package:booking_app/models/user.dart';
 import 'package:booking_app/screens/authentication/authenticate.dart';
 import 'package:booking_app/screens/datapages/properties_list.dart';
-import 'package:booking_app/screens/datapages/properties_listt.dart';
 import 'package:booking_app/services/GetPropdata.dart';
 import 'package:booking_app/services/properties_class.dart';
 import 'package:flutter/material.dart';
