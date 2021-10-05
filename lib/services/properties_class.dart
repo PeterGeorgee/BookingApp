@@ -6,7 +6,7 @@ class Properties{
   List<section> secs=[];
   List<Halls> halls=[];
 
-  Properties({required this.ownerName, required this.propID, required this.propName, required this.location});
+  Properties({required this.ownerName, required this.propID, required this.propName, required this.location,required this.halls,required this.secs});
 
 }
 class Halls{
@@ -17,9 +17,10 @@ class Halls{
 }
 
 class section{
+  String sectionname;
   List<Room> rooms;
 
-  section({required this.rooms});
+  section({required this.rooms,required this.sectionname});
 }
 class Room{
   int numOfRooms;
