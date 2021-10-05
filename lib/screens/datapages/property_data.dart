@@ -23,6 +23,9 @@ class _PropertyDataState extends State<PropertyData> {
   String userType='Peter George ';
   //List<String> hallsNames=[];
   late Halls selectedHall;
+  late section selectedSection;
+  String _hintHall='Select Hall';
+  String _hintSec='Select Section';
 
   @override
   Widget build(BuildContext context) {
@@ -46,28 +49,40 @@ class _PropertyDataState extends State<PropertyData> {
                 Text(widget.MyProperty.location,style: TextStyle(fontSize: 15.0),),
                 SizedBox(height: 40.0,),
                 DropdownButton<Halls>(
-                  hint:  Text("Select Hall"),
-                  value: selectedHall,
+                  hint:  Text(_hintHall),
                   onChanged: (Halls? Value) {
                     setState(() {
+                      _hintHall=Value!.hallName;
                       selectedHall = Value!;
                     });
                   },
                   items: widget.MyProperty.halls.map((Halls hall) {
                     return  DropdownMenuItem<Halls>(
                       value: hall,
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            hall.hallName,
-                            style:  TextStyle(color: Colors.black),
-                          ),
-                          SizedBox(height: 4,),
-                          Text(
-                            'Capacity: ${hall.hallCapacity.toString()}',
-                          )
-                        ],
+                      child: Container(
+                        height: 80,
+                        width: 120,
+                        child: ListTile(
+                          leading: Text(hall.hallName),
+                          title: Text(hall.hallCapacity.toString()),
+                        ),
                       ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 40.0,),
+                DropdownButton<section>(
+                  hint:  Text(_hintSec),
+                  onChanged: (section? Value) {
+                    setState(() {
+                      _hintSec=Value!.sectionname;
+                      selectedSection = Value!;
+                    });
+                  },
+                  items: widget.MyProperty.secs.map((section sec) {
+                    return  DropdownMenuItem<section>(
+                      value: sec,
+                      child: Text(sec.sectionname),
                     );
                   }).toList(),
                 ),
