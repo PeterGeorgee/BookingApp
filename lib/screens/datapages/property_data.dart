@@ -1,4 +1,7 @@
 import 'package:booking_app/models/user.dart';
+import 'package:booking_app/screens/datapages/profile.dart';
+import 'package:booking_app/screens/datapages/properties_list.dart';
+import 'package:booking_app/screens/home/wrapper.dart';
 import 'package:booking_app/services/properties_class.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +29,7 @@ class _PropertyDataState extends State<PropertyData> {
   late section selectedSection;
   String _hintHall='Select Hall';
   String _hintSec='Select Section';
-
+  int _currentIndex=0;
   @override
   Widget build(BuildContext context) {
     // for(int i=0;i<widget.MyProperty.halls.length;i++){
@@ -108,6 +111,40 @@ class _PropertyDataState extends State<PropertyData> {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+            backgroundColor: Colors.black
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Text('Profile'),
+              backgroundColor: Colors.black
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.logout),
+              title: Text('Logout'),
+              backgroundColor: Colors.black
+          ),
+        ],
+        onTap: (index){
+          setState(() {
+            _currentIndex=index;
+          });
+          if(index==0){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Wrapper()),);
+          }
+          else if(index==1){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()),);
+          }
+          else {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Wrapper()),);
+          }
+        },
       ),
     );
   }
