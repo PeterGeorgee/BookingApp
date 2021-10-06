@@ -1,5 +1,6 @@
 import 'package:booking_app/models/user.dart';
 import 'package:booking_app/screens/authentication/authenticate.dart';
+import 'package:booking_app/screens/datapages/mainPage.dart';
 import 'package:booking_app/screens/datapages/properties_list.dart';
 import 'package:booking_app/services/GetPropdata.dart';
 import 'package:booking_app/services/properties_class.dart';
@@ -17,7 +18,7 @@ class Wrapper extends StatelessWidget {
       return Authenticate();
     }
     else{
-      return StreamProvider<List<Properties>>.value(child: PropertiesList(),
+      return StreamProvider<List<Properties>>.value(child: MainPage(),
       value: getpropertiesfromdatabase().propers, initialData: [],);
     }
   }

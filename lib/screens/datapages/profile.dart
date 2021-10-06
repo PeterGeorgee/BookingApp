@@ -1,3 +1,5 @@
+import 'package:booking_app/screens/home/wrapper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -12,10 +14,20 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
-        centerTitle: true,
+        title: Text('My Profile'),
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
+        actions: [
+          FlatButton.icon(
+            onPressed: ()async{
+              await FirebaseAuth.instance.signOut();
+              Navigator.pop(context);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Wrapper()));
+            },
+            icon: Icon(Icons.logout,color: Colors.white,),
+            label: Text('Logout',style: TextStyle(color: Colors.white),),
+          )
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),

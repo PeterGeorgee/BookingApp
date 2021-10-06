@@ -1,4 +1,6 @@
+import 'package:booking_app/screens/datapages/profile.dart';
 import 'package:booking_app/screens/datapages/property_tile.dart';
+import 'package:booking_app/screens/home/wrapper.dart';
 import 'package:booking_app/services/properties_class.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +16,7 @@ class PropertiesList extends StatefulWidget {
 class _PropertiesListState extends State<PropertiesList> {
 
   List<Properties> propsOnSearch=[];
-
-  // List<Properties> props=[
-  //   Properties(ownerName:'Peter George', propID:'1', propName:'Beit el Wadi', location:'Wadi El natroon'),
-  //   Properties(ownerName:'Peter Magdy', propID:'2', propName:'Beit el Salam', location:'Agamy'),
-  //   Properties(ownerName:'Abadeer Afif', propID:'3', propName:'Beit el Merryland', location:'Obour'),
-  //   Properties(ownerName:'Kareem', propID:'4', propName:'Beit Sam3an el Kharaz', location:'Wadi El natroon'),
-  // ];
-
+  int _currentIndex=0;
 
 
   TextEditingController? _textEditingController=TextEditingController();
@@ -64,10 +59,9 @@ class _PropertiesListState extends State<PropertiesList> {
             onPressed: ()async{
               await FirebaseAuth.instance.signOut();
             },
-            icon: Icon(Icons.person,color: Colors.white,),
-            label: Text('Logout'),
-            textColor: Colors.white,
-          ),
+            icon: Icon(Icons.logout,color: Colors.white,),
+            label: Text('Logout',style: TextStyle(color: Colors.white),),
+          )
         ],
       ),
       body: _textEditingController!.text.isNotEmpty&&propsOnSearch.isEmpty?
@@ -96,6 +90,41 @@ class _PropertiesListState extends State<PropertiesList> {
           return PropertyTile(props: properties[index]);
         },
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _currentIndex,
+      //   items: [
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.home),
+      //         title: Text('Home'),
+      //         backgroundColor: Colors.black
+      //     ),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.person),
+      //         title: Text('Profile'),
+      //         backgroundColor: Colors.black
+      //     ),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.logout),
+      //         title: Text('Logout'),
+      //         backgroundColor: Colors.black
+      //     ),
+      //   ],
+      //   onTap: (index) async {
+      //     setState(() {
+      //       _currentIndex=index;
+      //     });
+      //     if(index==0){
+      //       Navigator.push(context, MaterialPageRoute(builder: (context) => Wrapper()),);
+      //     }
+      //     else if(index==1){
+      //       Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()),);
+      //     }
+      //     else {
+      //       await FirebaseAuth.instance.signOut();
+      //       //Navigator.push(context, MaterialPageRoute(builder: (context) => Wrapper()),);
+      //     }
+      //   },
+      // ),
     );
   }
 }

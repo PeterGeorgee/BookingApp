@@ -15,18 +15,15 @@ class getpropertiesfromdatabase
     List<Halls> placehalls=[];
     halls.forEach((element) {
       LinkedHashMap e=element;
+      String hallname='';
+      int hallcap=0;
       e.forEach((key, value) {
-        String hallname='';
-        int hallcap=0;
-        if(key=='hallname')
+        if(key=='hallName')
           hallname=value;
         else if(key=='hallCapacity')
           hallcap=int.parse(value) ;
-        placehalls.add(Halls(hallName: hallname,hallCapacity: hallcap));
-
-
-
       });
+      placehalls.add(Halls(hallName: hallname, hallCapacity: hallcap));
     });
     return placehalls;
 
@@ -59,7 +56,11 @@ class getpropertiesfromdatabase
                   roomname=value;
                 else if(key=='capacity')
                   cap=int.parse(value);
-                prooms.add(Room(numOfRooms: numberofrooms,roomName: roomname,roomCapacity: cap));
+                if(cap!=0) {
+                  prooms.add(Room(numOfRooms: numberofrooms,
+                      roomName: roomname,
+                      roomCapacity: cap));
+                }
               });
 
             });
