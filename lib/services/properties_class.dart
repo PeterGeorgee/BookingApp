@@ -30,3 +30,10 @@ class Room{
   Room({required this.numOfRooms, required this.roomCapacity, required this.roomName});
 
 }
+class UserData{
+  String name;
+  String phoneNum;
+  String email;
+
+  UserData({required this.name, required this.phoneNum, required this.email});
+}

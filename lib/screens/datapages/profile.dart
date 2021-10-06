@@ -1,4 +1,5 @@
 import 'package:booking_app/screens/home/wrapper.dart';
+import 'package:booking_app/services/properties_class.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+  late UserData selectedUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +46,7 @@ class _ProfileState extends State<Profile> {
               ),
               SizedBox(height: 10.0,),
               Text(
-                'Peter George',
+                selectedUser.name,
                 style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 1.0,
@@ -61,7 +64,7 @@ class _ProfileState extends State<Profile> {
               ),
               SizedBox(height: 10.0,),
               Text(
-                '01272075893',
+                selectedUser.phoneNum,
                 style: TextStyle(
                     color: Colors.black,
                     letterSpacing: 1.0,
@@ -78,7 +81,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   SizedBox(width: 10.0),
                   Text(
-                    'petergeoorge@gmail.com',
+                    selectedUser.email,
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
